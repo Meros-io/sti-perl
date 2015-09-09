@@ -1,7 +1,7 @@
-FROM openshift/base-centos7
+FROM deploydock/base-centos7
 
 # This image provides a Perl 5.16 environment you can use to run your Perl applications.
-MAINTAINER SoftwareCollections.org <sclorg@redhat.com>
+MAINTAINER Eric Sites <eric@meros.io>
 
 EXPOSE 8080
 
@@ -11,8 +11,8 @@ ENV PERL_VERSION=5.16 \
 
 LABEL io.k8s.description="Platform for building and running Perl 5.1.6 applications" \
       io.k8s.display-name="Apache 2.4 with mod_perl/5.1.6" \
-      io.openshift.expose-services="8080:http" \
-      io.openshift.tags="builder,perl,perl516"
+      io.deploydock.expose-services="8080:http" \
+      io.deploydock.tags="builder,perl,perl516"
 
 # TODO: Cleanup cpanp cache after cpanminus is installed?
 RUN yum install -y \
@@ -31,7 +31,7 @@ COPY ./s2i/bin/ /usr/local/sti
 COPY ./contrib/ /opt/app-root
 
 # In order to drop the root user, we have to make some directories world
-# writeable as OpenShift default security model is to run the container under
+# writeable as DeployDock default security model is to run the container under
 # random UID.
 RUN mkdir -p /opt/app-root/etc/httpd.d && \
     sed -i -f /opt/app-root/etc/httpdconf.sed /opt/rh/httpd24/root/etc/httpd/conf/httpd.conf  && \

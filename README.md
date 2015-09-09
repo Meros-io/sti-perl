@@ -1,9 +1,9 @@
-Perl for OpenShift - Docker images
+Perl for DeployDock - Docker images
 ========================================
 
 This repository contains the source for building various versions of
 the Perl application as a reproducible Docker image using
-[source-to-image](https://github.com/openshift/source-to-image).
+[source-to-image](https://github.com/Meros-io/source-to-image).
 Users can choose between RHEL and CentOS based builder images.
 The resulting image can be run using [Docker](http://docker.io).
 
@@ -30,7 +30,7 @@ To build a Perl image, choose either the CentOS or RHEL based image:
     subscribed RHEL machine.
 
     ```
-    $ git clone https://github.com/openshift/sti-perl.git
+    $ git clone https://github.com/Meros-io/sti-perl.git
     $ cd sti-perl
     $ make build TARGET=rhel7 VERSION=5.16
     ```
@@ -40,13 +40,13 @@ To build a Perl image, choose either the CentOS or RHEL based image:
     This image is available on DockerHub. To download perl-5.16 image, run:
 
     ```
-    $ docker pull openshift/perl-516-centos7
+    $ docker pull deploydock/perl-516-centos7
     ```
 
     To build the perl-5.16 image from scratch run:
 
     ```
-    $ git clone https://github.com/openshift/sti-perl.git
+    $ git clone https://github.com/Meros-io/sti-perl.git
     $ cd sti-perl
     $ make build VERSION=5.16
     ```
@@ -57,19 +57,19 @@ on all provided versions of Perl.**
 
 Usage
 ---------------------
-To build a simple [perl-sample-app](https://github.com/openshift/sti-perl/tree/master/5.16/test/sample-test-app) application,
-using standalone [S2I](https://github.com/openshift/source-to-image) and then run the
+To build a simple [perl-sample-app](https://github.com/Meros-io/sti-perl/tree/master/5.16/test/sample-test-app) application,
+using standalone [S2I](https://github.com/Meros-io/source-to-image) and then run the
 resulting image with [Docker](http://docker.io) execute:
 
 *  **For RHEL based image**
     ```
-    $ s2i build https://github.com/openshift/sti-perl.git --context-dir=5.16/test/sample-test-app/ openshift/perl-516-rhel7 perl-sample-app
+    $ s2i build https://github.com/Meros-io/sti-perl.git --context-dir=5.16/test/sample-test-app/ deploydock/perl-516-rhel7 perl-sample-app
     $ docker run -p 8080:8080 perl-sample-app
     ```
 
 *  **For CentOS based image**
     ```
-    $ s2i build https://github.com/openshift/sti-perl.git --context-dir=5.16/test/sample-test-app/ openshift/perl-516-centos7 perl-sample-app
+    $ s2i build https://github.com/Meros-io/sti-perl.git --context-dir=5.16/test/sample-test-app/ deploydock/perl-516-centos7 perl-sample-app
     $ docker run -p 8080:8080 perl-sample-app
     ```
 
@@ -81,7 +81,7 @@ $ curl 127.0.0.1:8080
 
 Test
 ---------------------
-This repository also provides a [S2I](https://github.com/openshift/source-to-image) test framework,
+This repository also provides a [S2I](https://github.com/Meros-io/source-to-image) test framework,
 which launches tests to check functionality of a simple Perl application built on top of the sti-perl image.
 
 Users can choose between testing a Perl test application based on a RHEL or CentOS image.
@@ -122,7 +122,7 @@ Repository organization
 
     * **`s2i/bin/`**
 
-        This folder contains scripts that are run by [S2I](https://github.com/openshift/source-to-image):
+        This folder contains scripts that are run by [S2I](https://github.com/Meros-io/source-to-image):
 
         *   **assemble**
 
@@ -131,7 +131,7 @@ Repository organization
             modules, etc.).
             In order to install application dependencies, the application must contain a
             `cpanfile` file, in which the user specifies the modules and their versions.
-            An example of a [cpanfile](https://github.com/openshift/sti-perl/blob/master/5.16/test/sample-test-app/cpanfile) is available within our test application.
+            An example of a [cpanfile](https://github.com/Meros-io/sti-perl/blob/master/5.16/test/sample-test-app/cpanfile) is available within our test application.
 
         *   **run**
 
@@ -148,16 +148,16 @@ Repository organization
 
     * **`test/`**
 
-        This folder contains the [S2I](https://github.com/openshift/source-to-image)
+        This folder contains the [S2I](https://github.com/Meros-io/source-to-image)
         test framework.
 
         * **`sample-test-app/`**
 
-            A simple Perl application used for testing purposes by the [S2I](https://github.com/openshift/source-to-image) test framework.
+            A simple Perl application used for testing purposes by the [S2I](https://github.com/Meros-io/source-to-image) test framework.
 
         * **run**
 
-            This script runs the [S2I](https://github.com/openshift/source-to-image) test framework.
+            This script runs the [S2I](https://github.com/Meros-io/source-to-image) test framework.
 
 * **`hack/`**
 
@@ -166,13 +166,13 @@ Repository organization
 
 Image name structure
 ------------------------
-##### Structure: openshift/1-2-3
+##### Structure: deploydock/1-2-3
 
 1. Platform name (lowercase) - perl
 2. Platform version(without dots) - 516
 3. Base builder image - centos7/rhel7
 
-Examples: `openshift/perl-516-centos7`, `openshift/perl-516-rhel7`
+Examples: `deploydock/perl-516-centos7`, `deploydock/perl-516-rhel7`
 
 
 Environment variables
